@@ -27,3 +27,9 @@
     stem(x,ramp);
 
 ![](Images/Image_1.PNG)
+
+
+## Experiment 1-C
+###  Write a MATLAB program for generation of an audio tone with given amplitude, frequency, phase,
+### sampling frequency and length of the sequence. Store it in .wav file with given sampling frequency and BitsPerSample, read back and play the audio file.
+
