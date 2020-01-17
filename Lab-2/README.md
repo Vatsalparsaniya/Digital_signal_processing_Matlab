@@ -26,3 +26,4 @@
     subplot(2,2,3);
     stem(x,ramp);
 
+![](Images/Image_1.PNG)
