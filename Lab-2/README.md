@@ -51,4 +51,4 @@
     play(p);
 
 
-[wav file](exp1c.wav)
+[Generated wav file](exp1c.wav)
