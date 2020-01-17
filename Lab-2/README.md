@@ -49,3 +49,6 @@
     a = audioread('exp1c.wav');
     p = audioplayer(a,sam_freq);
     play(p);
+
+
+[wav file](exp1c.wav)
