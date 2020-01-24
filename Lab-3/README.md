@@ -7,4 +7,4 @@
 
 ![](Images/img_1.PNG)
 
-## Note: Use inbuilt functions: tf2zpk, zplane, isstable, impz, freqz.
+## Note: Use inbuilt functions: tf2zpk, zplane, isstable, impz,stepz, freqz.
