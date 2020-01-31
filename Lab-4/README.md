@@ -71,41 +71,46 @@
 
 ## Note: Use inbuilt function: impz, freqz. 
 ### (ii) Apply an audio signal of suitable length to this filter containing mixture of tones at 126Hz, 277Hz, 1050Hz, 2277Hz and 3400Hz with equal relative magnitudes and sampled at 8000Hz. Plot and hear its input and output using headphone/ear phone/speaker. 
-
-     clc;
-     clear all;
-     close all;
-     A=input('Enter the amplitude:');
-     Ph=input('Enter the phase in radian: ');
-     k=input('Enter no. of bits per sample: ');
-
-     Fs=8000;
-     N=input('Length of no of sample: ');
-     n=0:N-1;
-     x = A*sin(2*pi*(126/8000)*n+Ph) +A*sin(2*pi*(277/8000)*n+Ph) +A*sin(2*pi*(1050/8000)*n+Ph) + A*sin(2*pi*(2277/8000)*n+Ph) + A*sin(2*pi*(3400/8000)*n+Ph);
-     x_n = x/max(abs(x));
-     audiowrite('try.wav',x_n,Fs,'BitsPerSample',k);
-     a=audioread('try.wav');
-     p=audioplayer(a,Fs);
-
-     B = [1 zeros(1,239) 0.1];
-     A = [1 zeros(1,239) -0.8];
-     N1 = 3000;
-     [h, t] = impz(B,A,N1);
-     y = conv(h,x_n);
-     y_n = y/max(abs(y));
-     audiowrite('Exp_3_generated.wav',y_n,Fs,'BitsPerSample',k);
-     a1=audioread('Exp_3_generated.wav');
-     p1=audioplayer(a1,Fs);
-     play(p1);
-
+# Method-1 (Convolution)
+    clc;
+    clear all;
+    close all;
+    ampl = input('Enter sin Wave amplitude :');
+    %freq  = input('Enter sin Wave Frequency(Hz) :');
+    phase  = input('Enter sin Wave Phase in radian(ex: pi/2 ):');
+    sam_freq = input('Enter sin Wave Sampling frequency(samples par sec) :');
+    length_of_secquence = input('Enter sin Wave length of the sequence :');
+    B = input('Numerator cofficient :');
+    A = input('Denometer cofficient :');
+    N = input('Enter the lenght of h(z)');
+    %f = freq/sam_freq;
+    n = 0:1:length_of_secquence-1;
+    x = ampl*sin(2*pi*(126/8000)*n+phase)+ampl*sin(2*pi*(277/8000)*n+phase)+ampl*sin(2*pi*(1050/8000)*n+phase)+ampl*sin(2*pi*(2277/8000)*n+phase)+ampl*sin(2*pi*(3400/8000)*n+phase);
+    x_n= x/max(abs(x));
+    [H,n] = impz(B,A,N);
+    y=conv(H,x_n);
+    y_n=y/max(abs(y));
+    audiowrite('exp1c.wav',y_n,sam_freq,'Bitspersample',16);
+    a = audioread('exp1c.wav');
+    p = audioplayer(a,sam_freq);
+    play(p);
+    figure(1)
+    subplot(2,1,1);
+    stem(n(1:2000),y_n(1:2000));
+    subplot(2,1,2);
+    stem(n(1:2000),x_n(1:2000));
 ## Input : 
-    Enter the amplitude:1
-    Enter the phase in radian: 0
-    Enter no. of bits per sample: 16
-    Length of no of sample: 50000
+    Enter sin Wave amplitude :100
+    Enter sin Wave Phase in radian(ex: pi/2 ):0
+    Enter sin Wave Sampling frequency(samples par sec) :8000
+    Enter sin Wave length of the sequence :50000
+    Numerator cofficient :[1 zeros(1,239) 0.1]
+    Denometer cofficient :[1 zeros(1,239) -0.8]
+    Enter the lenght of h(z)4000
 ## Output:
 [Generated waw file](Exp_3_generated.wav)
+
+# Method-1 (Filter)
 
 # Experiment 4 
 ### (i) For M-tap moving average filter, plot the magnitude and phase response for different values of M using MATLAB.  
