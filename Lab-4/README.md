@@ -110,10 +110,37 @@
 ## Output:
 [Generated waw file](Exp_3_generated.wav)
 
-# Method-1 (Filter)
+# Method-2 (Filter)
 
-# Experiment 4 
-### (i) For M-tap moving average filter, plot the magnitude and phase response for different values of M using MATLAB.  
-## Note: Use inbuilt function: freqz. 
-### (ii) Write a MATLAB program to generate a signal x(n)=2n (0.95)n; 0≤n≤99. Corrupt it by additive random noise with amplitude in interval [-0.5 0.5]. Apply the signal to a Moving average filter with given tap length. Plot the input signal, noise signal, corrupted signal and filtered signal in same plot. Use proper labels and legends. Note: Use inbuilt functions: rand, filter  
- 
+    clc;
+    clear all;
+    close all;
+    A=input('Enter the amplitude:');
+    Ph=input('Enter the phase in radian: ');
+    %F=input('Enter the frequency in Hz: ');
+    %Fs=input('Enter the samling frequency: ');
+    k=input('Enter no. of bits per sample: ');
+    %f=F/8000;
+    Fs=8000;
+    N=input('Length of no of sample: ');
+    n=0:N-1;
+    x = A*sin(2*pi*(126/8000)*n+Ph) +A*sin(2*pi*(277/8000)*n+Ph) +A*sin(2*pi*(1050/8000)*n+Ph) + A*sin(2*pi*(2277/8000)*n+Ph) + A*sin(2*pi*(3400/8000)*n+Ph);
+    x_n = x/max(abs(x));
+    audiowrite('try.wav',x_n,Fs,'BitsPerSample',k);
+    a=audioread('try.wav');
+    p=audioplayer(a,Fs);
+    %play(p);
+    B = [1 zeros(1,239) 0.1];
+    A = [1 zeros(1,239) -0.8];
+    N1 = 3000;
+    [h, t] = impz(B,A,N1);
+    y = conv(h,x_n);
+    y_n = y/max(abs(y));
+    audiowrite('try1.wav',y_n,Fs,'BitsPerSample',k);
+    a1=audioread('try1.wav');
+    p1=audioplayer(a1,Fs);
+    play(p1);
+    %figure(1);
+    %subplot(2,1,1);
+    %stem(n,x_n);
+
