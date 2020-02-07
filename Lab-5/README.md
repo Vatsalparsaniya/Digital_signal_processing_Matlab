@@ -30,7 +30,7 @@
 
 ### Input:
     Enter the value of M:10
-    Denominator cofficient :2
+    Denominator cofficient :1
 
 ### 2)  Write a MATLAB program to generate a signal x(n)=2n (0.95) n ; 0≤n≤99. Corrupt it by additive random noise with amplitude in interval [-0.5 0.5]. Apply the signal to a Moving average filter with given tap length. Plot the input signal,noise signal, corrupted signal and filtered signal in same plot. Use proper labels and legends.
 ### Note: Use inbuilt functions: rand, filter
